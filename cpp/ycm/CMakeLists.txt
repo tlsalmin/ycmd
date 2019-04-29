@@ -271,6 +271,8 @@ if ( EXTERNAL_LIBCLANG_PATH OR USE_SYSTEM_LIBCLANG )
     file( GLOB SYS_LLVM_PATHS "/usr/lib/llvm*/lib" )
     # On FreeBSD , llvm install into /usr/local/llvm-xy
     file ( GLOB FREEBSD_LLVM_PATHS "/usr/local/llvm*/lib")
+    # On Gentoo , clang install into /usr/lib/llvm/<version>
+    file ( GLOB GENTOO_CLANG_PATHS "/usr/lib/llvm/*/lib64")
     # Need TEMP because find_library does not work with an option variable
     # On Debian-based systems only a symlink to libclang.so.1 is created
     find_library( TEMP
@@ -284,6 +286,7 @@ if ( EXTERNAL_LIBCLANG_PATH OR USE_SYSTEM_LIBCLANG )
                   /usr/lib/llvm
                   ${SYS_LLVM_PATHS}
                   ${FREEBSD_LLVM_PATHS}
+                  ${GENTOO_CLANG_PATHS}
                   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib
                   /Library/Developer/CommandLineTools/usr/lib )
     set( EXTERNAL_LIBCLANG_PATH ${TEMP} )
